@@ -1,6 +1,6 @@
 import web3 from './web3'
 
-const address = '0x7Be6cfB62430DF875303e3cdC37CF9393BC64EDb'
+const address = '0x2D9339AC20C55C241577C60a35B2a2689F3F264c'
 
 const abi = [
 	{
@@ -72,20 +72,6 @@ const abi = [
 			}
 		],
 		"name": "players",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "lastWinner",
 		"outputs": [
 			{
 				"name": "",

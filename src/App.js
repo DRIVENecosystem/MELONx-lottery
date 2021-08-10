@@ -2,7 +2,7 @@ import React from "react";
 import web3 from "./web3";
 import lottery from "./lottery";
 import logo from "./logo.png";
-import "./App.css";
+import "./index.css";
 
 
 
@@ -48,10 +48,9 @@ class App extends React.Component {
   
 
   updatePlayersBalance = async () => {
-        const manager = await lottery.methods.manager().call();
         const players = await lottery.methods.getPlayers().call();
         const balance = await web3.eth.getBalance(lottery.options.address);
-       await this.setState({manager, players, balance});
+       await this.setState({players, balance});
     };
 
 
@@ -65,40 +64,44 @@ class App extends React.Component {
         from: accounts[0]
       });
       const winner = await lottery.methods.lastWinner().call();
-      this.setState({message: winner + ' won the last lottery game'});
+      this.setState({message: winner + ' won!'});
     };
 
   render() {
     return (
 
       <center><div><br></br>
-      <img src={logo} alt="Logo" />
-        <h2>Melon's Lottery</h2>
-        <p>
-          This contract is managed by Melon Team ({this.state.manager}). </p><p>There are currently<b>{" "}
+      <div><img src={logo} alt="Logo" /></div>
+        <h2 className = "fontMelon">Melon's Lottery</h2>
+        
+
+          <p className = "fontPrizePool">There are currently<b>{" "}
           {this.state.players.length}</b> people entered, competing to win<b>{" "}
           {web3.utils.fromWei(this.state.balance, "ether")} BNB!</b>
         </p>
 
-        <hr />
         <form onSubmit={this.onSubmit}>
-          <h4>Try your luck and try to not lose your money!</h4>
           <div>
-            <label>Amount of BNB to enter (Min: 0.005 / Max: 0.01) </label>
-            <input
+            <label className = "amountOf">Amount of BNB to enter (Min: 0.005 / Max: 0.01) </label>
+            <p><input
               value={this.state.value}
               onChange={(event) => this.setState({ value: event.target.value })}
-            />
+            /></p>
           </div>
-          <p><button>Enter</button></p>
+          <p><button className="buttonEnter">Enter</button></p>
         </form>
 
 
-        <h4>Pick a winner (Manager Only)</h4>
-        <button onClick={this.onClick}>Start</button>
+        <button className="buttonStart" onClick={this.onClick}>Pick a winner! (Manager Only)</button>
         
-        <h1>{this.state.message}</h1>
+        <h1 className = "fontNotification">{this.state.message}</h1>
+        <p className = "fontSubtitle">
+          This contract is managed by Melon Team. </p>
+
       </div>
+      
+          <p className = "fontFooterLinks">
+          Links: <a href = "https://melontokenbsc.com/">Website</a> | <a href = "https://twitter.com/melontokenbsc">Twitter</a> | <a href = "https://t.me/melonbsc"> Telegram</a></p>
       </center>
     );
   }
