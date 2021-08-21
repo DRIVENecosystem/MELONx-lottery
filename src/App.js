@@ -45,14 +45,13 @@ class App extends React.Component {
     await this.updatePlayersBalance();
   };
 
-  
 
-  updatePlayersBalance = async () => {
+updatePlayersBalance = async () => {
         const players = await lottery.methods.getPlayers().call();
         const balance = await web3.eth.getBalance(lottery.options.address);
-       await this.setState({players, balance});
+        await this.setState({players, balance});
+      
     };
-
 
     onClick = async (event) =>{
       event.preventDefault();
@@ -70,7 +69,8 @@ class App extends React.Component {
   render() {
     return (
 
-      <center><div><br></br>
+      <center>
+ <div><br></br>
       <div><img src={logo} alt="Logo" /></div>
         <h2 className = "fontMelon">Melon's Lottery</h2>
         
@@ -93,7 +93,6 @@ class App extends React.Component {
 
 
         <button className="buttonStart" onClick={this.onClick}>Pick a winner! (Manager Only)</button>
-        
         <h1 className = "fontNotification">{this.state.message}</h1>
         <p className = "fontSubtitle">
           This contract is managed by Melon Team. </p>
